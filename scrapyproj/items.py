@@ -12,10 +12,9 @@ class ScrapyprojItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     name = scrapy.Field()
+    section = scrapy.Field()
     author = scrapy.Field()
-    novel_url = scrapy.Field()
-    status = scrapy.Field()
     words = scrapy.Field()
-    category = scrapy.Field()
-    name_id = scrapy.Field()
+    update = scrapy.Field()
+    status = scrapy.Field()
 
