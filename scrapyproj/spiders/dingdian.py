@@ -29,7 +29,9 @@ class DingDianSpider(scrapy.Spider):
     def parse(self, response):
         dd_items = ScrapyprojItem()
         novels = response.xpath('//div[@class="bdsub"]//dl[@id="content"]//dd//table//tr[position()>1]')
+        count = 0
         for item in novels:
+            count += 1
             dd_items['name'] = item.xpath('.//td/a[2]/text()').extract_first()
             dd_items['section'] = item.xpath('./td[2]//text()').extract_first()
             dd_items['author'] = item.xpath('./td[3]//text()').extract_first()
