@@ -15,6 +15,7 @@ from scrapyproj.items import ScrapyprojItem
 
 class DingDianSpider(scrapy.Spider):
     name = 'dingdian'
+    # 允许的域名，非此域名则不抓取
     allowed_domains = ['x23us.com']
     leftpart_url = 'http://www.x23us.com/class/'
     rightpart_url = '.html'
@@ -41,7 +42,6 @@ class DingDianSpider(scrapy.Spider):
             yield dd_items
 
         # 爬取下一页，数据量大
-        # next_page_sl = response.xpath('//div[@id="pagelink"]/a[@class="next"]/@href').extract()
+        # next_page_sl = response.xpath('//div[@id="pagelink"]/a[@class="next"]/@href').extract_first()
         # if next_page_sl:
-        #     next_page = next_page_sl[0]
-        #     yield scrapy.Request(url=next_page, callback=self.parse)
+        #     yield scrapy.Request(url=next_page_sl, callback=self.parse)
