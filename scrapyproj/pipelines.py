@@ -28,5 +28,5 @@ class ScrapyprojPipeline(object):
 
     def close_spider(self, spider):
         self.client.close()
-        print('数据已存入MongoDB')
+        print('爬虫完毕！数据已存入MongoDB')
 
