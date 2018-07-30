@@ -16,11 +16,17 @@ class ScrapyprojPipeline(object):
         self.db = MONGO_DB
         self.collection = MONGO_COLLECTION
 
-        client = pymongo.MongoClient(host=self.host, port=self.port)
-        scrapy_db = client[self.db]
+    def open_spider(self, spiser):
+        self.client = pymongo.MongoClient(host=self.host, port=self.port)
+        scrapy_db = self.client[self.db]
         self.novel_coll = scrapy_db[self.collection]
 
     def process_item(self, item, spider):
         data = dict(item)
         self.novel_coll.insert(data)
         return item
+
+    def close_spider(self, spider):
+        self.client.close()
+        print('数据已存入MongoDB')
+
