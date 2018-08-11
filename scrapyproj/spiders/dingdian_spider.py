@@ -14,7 +14,7 @@ from scrapyproj.items import ScrapyprojItem
 
 
 class DingDianSpider(scrapy.Spider):
-    name = 'dingdian'
+    name = 'dingdian_spider'
     # 允许的域名，非此域名则不抓取
     allowed_domains = ['x23us.com']
     leftpart_url = 'http://www.x23us.com/class/'

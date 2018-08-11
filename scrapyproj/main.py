@@ -9,6 +9,6 @@
 Description : 
 -------------------------------------------------------------
 """
-from scrapy import cmdline
+# from scrapy import cmdline
 
-cmdline.execute('scrapy crawl dingdian'.split())
+# cmdline.execute('scrapy crawl dingdian'.split())
