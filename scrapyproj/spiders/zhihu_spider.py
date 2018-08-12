@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+from urllib.parse import urljoin
+
 import scrapy
+
+from scrapyproj.items import ZhihuItem
 
 
 class ZhihuSpider(scrapy.Spider):
@@ -12,4 +16,35 @@ class ZhihuSpider(scrapy.Spider):
     #     yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        print(response.text.encode())
+        items = ZhihuItem()
+        profile_header = response.xpath('//div[@id="ProfileHeader"]//div[@class="ProfileHeader-content"]')
+
+        items['name'] = profile_header.xpath('.//h1/span[1]/text()').extract()
+        items['position'] = profile_header.xpath('.//h1/span[2]/text()').extract()
+        items['addr'] = profile_header.xpath('.//div[@class="ProfileHeader-detail"]/div[@class="ProfileHeader-detailItem"][1]/div[@class="ProfileHeader-detailValue"]/span/text()').extract()
+        items['industry'] = profile_header.xpath('.//div[@class="ProfileHeader-detail"]/div[@class="ProfileHeader-detailItem"][2]/div[@class="ProfileHeader-detailValue"]/text()').extract()
+        items['experience'] = profile_header.xpath('.//div[@class="ProfileHeader-detail"]/div[@class="ProfileHeader-detailItem"][3]/div[@class="ProfileHeader-detailValue"]/div[@class="ProfileHeader-field"]/text()').extract()
+
+        follows = response.xpath('//div[@id="Profile-following"]//div[@class="List-item"]//div[@class="Popover"]//a//text()')
+
+        follow_list = []
+        for follow in follows:
+            # items['follow'] = follow.extract()
+            follow_list.append(follow.extract())
+
+        items['follow'] = follow_list
+        print('==>>', items)
+
+        follow_user_url_base = response.xpath('//div[@id="Profile-following"]//div[@class="List-item"]//div[@class="Popover"]//a/@href')
+
+        count = 0
+        for url in follow_user_url_base:
+            count += 1
+            if count >= 10:
+                return
+            follow_user_url = 'https:'+url.extract()+'/following'
+            yield scrapy.Request(url=follow_user_url, callback=self.parse)
+
+
+
+

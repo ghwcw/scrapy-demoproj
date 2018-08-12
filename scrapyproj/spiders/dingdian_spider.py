@@ -20,6 +20,10 @@ class DingDianSpider(scrapy.Spider):
     leftpart_url = 'http://www.x23us.com/class/'
     rightpart_url = '.html'
 
+    custom_settings = {
+        'ITEM_PIPELINES': {'scrapyproj.pipelines.ScrapyprojPipeline': 300, }
+    }
+
     # 可以直接全使用start_urls装入全部请求，不过并不太美观。可以重写start_requests方法
     # 按小说类别分别爬取
     def start_requests(self):
