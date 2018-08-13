@@ -37,13 +37,10 @@ class ZhihuSpider(scrapy.Spider):
 
         follow_user_url_base = response.xpath('//div[@id="Profile-following"]//div[@class="List-item"]//div[@class="Popover"]//a/@href')
 
-        count = 0
         for url in follow_user_url_base:
-            count += 1
-            if count >= 10:
-                return
             follow_user_url = 'https:'+url.extract()+'/following'
             yield scrapy.Request(url=follow_user_url, callback=self.parse)
+
 
 
 
