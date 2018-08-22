@@ -19,10 +19,10 @@ class ScrapyprojItem(scrapy.Item):
     status = scrapy.Field()
 
 
-class ZhihuItem(scrapy.Item):
-    name = scrapy.Field()
-    position = scrapy.Field()
-    addr = scrapy.Field()
-    industry = scrapy.Field()       # 行业
-    experience = scrapy.Field()     # 经历
-    follow = scrapy.Field()         # 关注
+# class ZhihuItem(scrapy.Item):
+#     name = scrapy.Field()
+#     position = scrapy.Field()
+#     addr = scrapy.Field()
+#     industry = scrapy.Field()       # 行业
+#     experience = scrapy.Field()     # 经历
+#     follow = scrapy.Field()         # 关注
