@@ -92,5 +92,5 @@ DOWNLOADER_MIDDLEWARES = {
 
 MONGO_HOST = '127.0.0.1'
 MONGO_PORT = 27017
-MONGO_DB = 'scrapy'
-MONGO_COLLECTION = 'novel'
+MONGO_DB = 'scrapy'             # 数据库
+MONGO_COLLECTION = 'novel'      # 集合

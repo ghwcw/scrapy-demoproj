@@ -11,5 +11,5 @@ Description :
 """
 from scrapy import cmdline
 
-# cmdline.execute('scrapy crawl dingdian'.split())
-cmdline.execute('scrapy crawl zhihu_spider'.split())
+cmdline.execute('scrapy crawl dingdian_spider'.split())
+# cmdline.execute('scrapy crawl zhihu_spider'.split())

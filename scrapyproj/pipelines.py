@@ -17,8 +17,8 @@ class ScrapyprojPipeline(object):
         self.collection = MONGO_COLLECTION
 
     def open_spider(self, spiser):
-        self.client = pymongo.MongoClient(host=self.host, port=self.port)
-        scrapy_db = self.client[self.db]
+        self.conn = pymongo.MongoClient(host=self.host, port=self.port)
+        scrapy_db = self.conn[self.db]
         self.novel_coll = scrapy_db[self.collection]
 
     def process_item(self, item, spider):
@@ -27,6 +27,6 @@ class ScrapyprojPipeline(object):
         return item
 
     def close_spider(self, spider):
-        self.client.close()
+        self.conn.close()
         # print('爬虫完毕！数据已存入MongoDB')
 
